@@ -1,4 +1,44 @@
-# ADF4351
+# ADF4351 - BLUEPILL edition
+
+SO2A STM32duino fork of https://github.com/olgierd/ADF4351
+
+![front](/adf_2.4GHz.jpeg)
+
+## Usage
+
+Check code. Use serial shortcuts to edit frequency, or adjust the follwing line in the code:
+
+```
+unsigned long long frequency = 2400000000; // 2.4GHz
+```
+
+## Pinout connection
+
+(warning: see note for cheaper smaller boards!)
+
+```
+ADF4351 <=> BluePill STM32Fxx
+   DATA <=> PA7
+   CLK  <=> PA5
+    LE  <=> PA4 
+  3.3V  <=> 3.3V
+   GND  <=> GND
+
+Serial USB adapter <=> BluePill STM32Fxx
+   RX <=> PA9   (TX)
+   TX <=> PA10  (RX)
+   GND <=> GND
+```
+
+## Cheap boards from Ali may have pin description swapped
+
+On some boards, pins labels are swapped:
+
+    - Pin labaled "DATA" is actually CLK
+    - Pin labeled "CLK" is actually LE
+    - Pin labeled "LE" is actually DATA
+
+# Upstream Readme follows:
 
 Code to control your ADF4351 board using Arduino. Written from scratch using official datasheet.
 

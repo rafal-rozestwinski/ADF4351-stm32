@@ -5,8 +5,18 @@
 #define SHL(x,y) ((uint32_t)1<<y)*x
 
 #define REF_CLK 25000000
-uint8_t slave_select_pin = 9;
-unsigned long long frequency = 1000000000;
+uint8_t slave_select_pin = PA4; // LE, PA4 
+/*
+* Arduino pin #13 <-> `CLK`
+* Arduino pin #11 <-> `DATA`
+* Arduino pin #9 <-> `LE`
+
+*/
+
+//unsigned long long frequency = 1000000000; // 1GHz
+unsigned long long frequency = 2400000000; // 2.4GHz
+//unsigned long long frequency = 1300000000; // 1.3GHz
+//unsigned long long frequency =  433000000; // 0.433GHz
 
 // Register 0:
 uint16_t INT=0; 
@@ -49,8 +59,8 @@ uint8_t mtld = 1;
 uint8_t aux_outsel = 0;
 uint8_t aux_outena;
 uint8_t aux_pwr;
-uint8_t rf_ena = ; // 0 - output disabled
-uint8_t out_pwr = 0; // 0 - min, 3 - max
+uint8_t rf_ena = 1; // 0 - output disabled
+uint8_t out_pwr = 3; // 0 - min, 3 - max
 
 // Register 5:
 uint8_t ld_pinmode = 1;
@@ -119,9 +129,10 @@ void setup() {
   SPI.setDataMode(SPI_MODE0);
   SPI.setBitOrder(MSBFIRST);
   SPI.setClockDivider(SPI_CLOCK_DIV128);
+  //spi_settings = SPISettings(1000000UL, MSBFIRST, SPI_MODE0) ;
   SPI.begin();
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   
   delay(500);
 
